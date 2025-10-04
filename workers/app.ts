@@ -1,4 +1,5 @@
 import { createRequestHandler } from "react-router";
+import { handleAPIRequest } from "./api";
 
 declare module "react-router" {
   export interface AppLoadContext {
@@ -15,7 +16,15 @@ const requestHandler = createRequestHandler(
 );
 
 export default {
-  fetch(request, env, ctx) {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    
+    // Handle API routes
+    if (url.pathname.startsWith('/api/')) {
+      return handleAPIRequest(request, env.DUCKLYTICS_PROD, env.EVENT_STORAGE);
+    }
+    
+    // Handle all other routes with React Router
     return requestHandler(request, {
       cloudflare: { env, ctx },
     });

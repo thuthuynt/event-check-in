@@ -10,5 +10,18 @@
   "upload_source_maps": true,
   "vars": {
     "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DUCKLYTICS_PROD",
+      "database_name": "ducklytics-db",
+      "database_id": "30bf22a3-601f-462a-95e0-40dfd0d49016"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "EVENT_STORAGE",
+      "bucket_name": "event-check-in-storage"
+    }
+  ]
 }

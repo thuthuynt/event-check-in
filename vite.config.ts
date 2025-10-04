@@ -11,4 +11,7 @@ export default defineConfig({
     reactRouter(),
     tsconfigPaths(),
   ],
+  optimizeDeps: {
+    include: ["@cloudflare/vite-plugin", "@tailwindcss/vite"]
+  }
 });
