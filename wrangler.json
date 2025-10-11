@@ -24,5 +24,11 @@
       "binding": "EVENT_STORAGE",
       "bucket_name": "event-check-in-storage"
     }
+  ],
+  "routes": [
+    {
+      "pattern": "check-in.ducklytics.com/*",
+      "zone_name": "ducklytics.com"
+    }
   ]
 }
