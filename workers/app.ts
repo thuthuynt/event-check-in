@@ -1,5 +1,6 @@
 import { createRequestHandler } from "react-router";
 import { handleAPIRequest } from "./api";
+import { handleMockAPIRequest } from "./mock-api";
 
 declare module "react-router" {
   export interface AppLoadContext {
@@ -21,7 +22,13 @@ export default {
     
     // Handle API routes
     if (url.pathname.startsWith('/api/')) {
-      return handleAPIRequest(request, env.DUCKLYTICS_PROD, env.EVENT_STORAGE);
+      // Check if we have Cloudflare services available
+      if (env && env.DUCKLYTICS_PROD && env.EVENT_STORAGE) {
+        return handleAPIRequest(request, env.DUCKLYTICS_PROD, env.EVENT_STORAGE, env.JWT_SECRET);
+      } else {
+        // Use mock API for local development
+        return handleMockAPIRequest(request);
+      }
     }
     
     // Handle all other routes with React Router
