@@ -170,6 +170,17 @@ export async function handleMockAPIRequest(request: Request): Promise<Response> 
     });
   }
 
+  if (path === '/api/upload' && method === 'POST') {
+    const mockUploadResponse = {
+      success: true,
+      url: 'https://mock-storage.example.com/mock-file.png',
+      message: 'File uploaded successfully'
+    };
+    return new Response(JSON.stringify(mockUploadResponse), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    });
+  }
+
   if (path === '/api/checkin' && method === 'POST') {
     const mockResponse = { success: true };
     
